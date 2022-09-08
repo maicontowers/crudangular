@@ -62,7 +62,8 @@ export class HomeComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
        if(result){
         if (this.dataSource.map(p => p.idcliente).includes(result.idcliente)) {
-          this.dataSource[result.idcliente - 1] = result;
+          const index = this.dataSource.findIndex(p => p.idcliente === result.idcliente);
+          this.dataSource[index] = result;
           this.table.renderRows();
         } else{
           this.dataSource.push(result);
@@ -70,7 +71,7 @@ export class HomeComponent implements OnInit {
         }
          
        }
-      });
+      }); 
     }
 
     ExcluirCadastro(idcliente:number): void{
